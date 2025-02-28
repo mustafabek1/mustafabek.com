@@ -94,7 +94,6 @@ export default async function About() {
       <Slide delay={0.14}>
         <Usage />
       </Slide>
-      
     </main>
   );
 }
