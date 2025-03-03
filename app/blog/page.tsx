@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: "https://mustafabek.com/blog",
     description: "Read latest stories from Mustafa Bek's Blog",
     images:
-      "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/blog.png",
+      "https://res.cloudinary.com/diqwbliye/image/upload/v1740988388/mustafa/blog.png",
   },
 };
 

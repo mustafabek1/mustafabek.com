@@ -1,5 +1,6 @@
 import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
+import { JobType } from "@/types";
 
 // Reusable post fields
 const postField = groq`
@@ -38,16 +39,14 @@ export const profileQuery = groq`*[_type == "profile"]{
 const mockProfile = {
   _id: "mock-profile",
   fullName: "MUSTAFA Bek",
-  headline: "Software Developer",
+  headline: "Software Engineer & Frontend Developer",
   profileImage: {
     image: "https://res.cloudinary.com/diqwbliye/image/upload/v1740732826/mustafa/xlfxgluj6txbdxfyfmnd.jpg",
     lqip: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...",
     alt: "Profile picture placeholder"
   },
-  shortBio: "A passionate developer who loves to build amazing apps.",
+  shortBio: "I'm Mastafa Bek, an experienced Software Engineer passionate about learning and building open-source software that is beneficial to developers and the world at large.",
   location: "istanbul, Turkey",
-  
-  // ✅ Portable Text formatına uygun hale getirildi!
   fullBio: [
     {
       _type: "block",
@@ -78,49 +77,7 @@ const mockProfile = {
   ],
   usage: [
     {
-      technologies: [
-        { name: 'React', description: 'UI Library' },
-        { name: 'Next.js', description: 'React Framework' },
-        { name: 'Redux', description: 'Production-grade State Management' },
-        { name: 'Zustand', description: 'State Management (personal projects)' },
-        { name: 'Sanity', description: 'Headless CMS' },
-        { name: 'Tailwind CSS', description: 'Styling Library' },
-        { name: 'TypeScript', description: 'Typed Superset of JavaScript' },
-        { name: 'Sass', description: 'CSS Preprocessor' },
-        { name: 'VitePress', description: 'Static Site Generator' },
-        { name: 'Python', description: 'Programming Language' }
-      ],
-      tools: [
-        { name: 'Visual Studio Code', description: 'Text Editor' },
-        { name: 'PyCharm', description: 'Python IDE' },
-        { name: 'IntelliJ Idea', description: 'Java IDE' },
-        { name: 'Postman', description: 'API Testing' },
-        { name: 'Hoppscotch', description: 'API Testing/Development' },
-        { name: 'Firefox', description: 'Web Browser' },
-        { name: 'Google Chrome', description: 'Web Browser' },
-        { name: 'Figma', description: 'Design Tool' },
-        { name: 'Microsoft Todo', description: 'Todo / Task Management' },
-        { name: 'Git Bash', description: 'Git Terminal' },
-        { name: 'Notion', description: 'Note taking and organization' }
-      ],
-      platforms: [
-        { name: 'GitHub', description: 'Version control/hosting service' },
-        { name: 'Spotify', description: 'Music Streaming' },
-        { name: 'GitLab', description: 'Version control/hosting service' },
-        { name: 'Steam', description: 'Gaming' },
-        { name: 'Vercel', description: 'Hosting and Database' },
-        { name: 'Netlify', description: 'Static JamStack hosting' }
-      ],
-      hardware: [
-        { name: 'Asus Zephyrus M15', description: 'Work Laptop' },
-        { name: 'Xiaomi G34WQi', description: '32" Curved Gaming Monitor' },
-        { name: 'Samsung S22D300HY', description: '22" Business Monitor' },
-        { name: 'Logitech MX Keys', description: 'Wireless Keyboard' },
-        { name: 'Logitech MX Master 2S', description: 'Mouse' },
-        { name: 'Bose Headphone 700', description: 'Bluetooth headphones (cheap version)' },
-        { name: 'Fifne H9 Wired Headset', description: 'Gaming headset' },
-        { name: 'Edifier R1200TII', description: 'Bookshelf Speakers' }
-      ]
+      
     }
   ]
 };
@@ -146,6 +103,41 @@ export const jobQuery = groq`*[_type == "job"] | order(_createdAt desc){
   startDate,
   endDate,
 }`;
+
+export const mockJobQuery = [
+  {
+    _id: "1",
+    name: "Kavak.com",
+    jobTitle: "Software Engineer",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740993513/mustafa/kavak_logo.png",
+    url: "https://kavak.com/tr",
+    description: "Developing AI models and applications. the technologies I use: Angular, React, Next.js, React Native, Argo, Npm, Nest.js, JavaScript, Jest, PostgreSQL, Agile, Node.js, Aws, Docker, OOP, Git,",
+    startDate: "2021-06-10",
+    endDate: "2025-02-01",
+  },
+  {
+    _id: "2",
+    name: "casemice Digital",
+    jobTitle: "Frontend Developer",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740993513/mustafa/caesemice_logo.jpg",
+    url: "https://casemice.com/",
+    description: "Building and optimizing web applications. the technologies I use: React, Next.js, React Native, Tailwind CSS, and TypeScript.",
+    startDate: "2020-10-01",
+    endDate: "2021-06-02",
+  },
+];
+
+export const getJob = async () => {
+  try {
+    const profile = await sanityFetch({ query: jobQuery, tags: ["profile"] }) as JobType[];
+
+    return profile.length > 0 ? profile : mockJobQuery; // Eğer boşsa mock datayı döndür
+  } catch (error) {
+    console.error("Sanity fetch error:", error);
+    return mockJobQuery; // Hata olursa mock datayı döndür
+  }
+};
+
 
 export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc){
   _id, 
