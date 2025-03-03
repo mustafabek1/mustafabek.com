@@ -6,15 +6,15 @@ import PageHeading from "@/app/components/shared/PageHeading";
 const images = [
   {
     id: "1",
-    src: "https://images.unsplash.com/photo-1585618256754-241cfe4e8113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=100",
+    src: "https://res.cloudinary.com/diqwbliye/image/upload/v1740989975/mustafa/istanbul_k.jpg",
   },
   {
     id: "2",
-    src: "https://images.unsplash.com/photo-1585619203238-70e7631cc672?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    src: "https://res.cloudinary.com/diqwbliye/image/upload/v1740989974/mustafa/galata.avif",
   },
   {
     id: "3",
-    src: "https://images.unsplash.com/photo-1585619443911-c2bb23fb2a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    src: "https://res.cloudinary.com/diqwbliye/image/upload/v1740989630/mustafa/waterfall.jpg",
   },
 ];
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: "https://mustafabek.com/photos",
     description: "Explore photos taken by Mustafa Bek",
     images:
-      "https://res.cloudinary.com/victoreke/image/upload/v1692635149/victoreke/photos.png",
+      "https://res.cloudinary.com/diqwbliye/image/upload/v1740988665/mustafa/photos.png",
   },
 };
 

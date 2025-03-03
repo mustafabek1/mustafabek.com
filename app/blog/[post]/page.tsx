@@ -12,7 +12,6 @@ import SharePost from "../../components/shared/SharePost";
 import FeaturedPosts from "../../components/pages/FeaturedPosts";
 import { Slide } from "../../animation/Slide";
 import { urlFor } from "@/lib/sanity.image";
-import Buymeacoffee from "@/app/components/shared/Buymeacoffee";
 //import Comments from "@/app/components/shared/Comments";
 import { HiCalendar, HiChat } from "react-icons/hi";
 import { sanityFetch } from "@/lib/sanity.client";
@@ -26,7 +25,7 @@ type Props = {
 };
 
 const fallbackImage: string =
-  "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/blog.png";
+  "https://res.cloudinary.com/diqwbliye/image/upload/v1740988388/mustafa/blog.png";
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -233,7 +232,6 @@ export default async function Post({ params }: Props) {
         <h3 className="lg:text-4xl text-3xl font-semibold tracking-tight mb-8">
           Support
         </h3>
-        <Buymeacoffee />
       </section>
     </main>
   );

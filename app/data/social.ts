@@ -67,13 +67,6 @@ export const socialLinks = [
     status: "social",
   },
   {
-    id: 16,
-    name: "Codewars",
-    url: "https://www.codewars.com/users/victoreke",
-    icon: SiCodewars,
-    status: "social",
-  },
-  {
     id: 17,
     name: "Gitlab",
     url: "https://gitlab.com/mustafa.bek",
