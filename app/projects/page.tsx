@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { projectsQuery } from "@/lib/sanity.query";
-import type { ProjectType } from "@/types";
+import { getProjects } from "@/lib/sanity.query";
 import EmptyState from "../components/shared/EmptyState";
 import { Slide } from "../animation/Slide";
-import { sanityFetch } from "@/lib/sanity.client";
 import PageHeading from "../components/shared/PageHeading";
 
 export const metadata: Metadata = {
@@ -22,16 +20,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Project() {
-  const projects: ProjectType[] = await sanityFetch({
-    query: projectsQuery,
-    tags: ["project"],
-  });
+  const projects= await getProjects();
 
   return (
     <main className="max-w-7xl mx-auto md:px-16 px-6">
       <PageHeading
         title="Projects"
-        description="I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas on how it can be improved."
+        description="a few of the projects I'm working on ."
       />
 
       <Slide delay={0.1}>
@@ -39,10 +34,12 @@ export default async function Project() {
           <section className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mb-12">
             {projects.map((project) => (
               <Link
-                href={`/projects/${project.slug}`}
-                key={project._id}
-                className="flex items-center gap-x-4 dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-4 rounded-lg"
-              >
+              href={project.projectUrl ? project.projectUrl : `/projects/${project.slug}`}
+              key={project._id}
+              target={project.projectUrl ? "_blank" : "_self"} // Eğer harici link varsa yeni sekmede aç
+              rel={project.projectUrl ? "noopener noreferrer" : undefined} // Güvenlik için rel ekle
+              className="flex items-center gap-x-4 dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-4 rounded-lg"
+            >
                 {project.logo ? (
                   <Image
                     src={project.logo}

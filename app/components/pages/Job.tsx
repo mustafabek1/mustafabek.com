@@ -7,7 +7,7 @@ import { sanityFetch } from "@/lib/sanity.client";
 import RefLink from "../shared/RefLink";
 
 export default async function Job() {
-  const profile = await getJob(); // getJob'tan dönen veriyi al
+  const job = await getJob();
 
   return (
     <section className="mt-32">
@@ -21,7 +21,7 @@ export default async function Job() {
 
       <Slide delay={0.18}>
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-12 gap-y-10">
-          {profile.map((data) => ( // profile kullan
+          {job.map((data) => ( // job kullan
             <div
               key={data._id}
               className="flex items-start lg:gap-x-6 gap-x-4 max-w-2xl relative before:absolute before:bottom-0 before:top-[5rem] before:left-9 before:w-[1px] before:h-[calc(100%-70px)] dark:before:bg-zinc-800 before:bg-zinc-200"

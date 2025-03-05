@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
-import { JobType } from "@/types";
+import { JobType, ProjectType } from "@/types";
 
 // Reusable post fields
 const postField = groq`
@@ -146,6 +146,77 @@ export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc)
   tagline,
   "logo": logo.asset->url,
 }`;
+
+export const mockProjectsQuery = [
+  {
+    _id: "1",
+    name: "carvak.com",
+    slug: "carvak.com/tr",
+    projectUrl: "https://kavak.com/tr",
+    tagline: "Used car buying and selling website.",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740993513/mustafa/kavak_logo.png",
+  },
+  {
+    _id: "2",
+    name: "Carvak App",
+    slug: "carvak-app",
+    projectUrl: "https://apps.apple.com/tr/app/carvak/id6469689024",
+    tagline: "Mobile application for buying and selling used cars.",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1741167754/mustafa/carvak_logo.png",
+  },
+  {
+    _id: "3",
+    name: "supply Funnel",
+    slug: "supply-funnel",
+    projectUrl: "https://www.carvak.com/tr/araba-sat",
+    tagline: "carvak.com's supply chain management system.",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740993513/mustafa/kavak_logo.png",
+  },
+  {
+    _id: "4",
+    name: "Catalogue Funnel",
+    slug: "catalogue-funnel",
+    projectUrl: "https://www.carvak.com/tr/satilik-arac",
+    tagline: "carvak.com's catalogue chain management system.",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740993513/mustafa/kavak_logo.png",
+  },
+  {
+    _id: "5",
+    name: "mustafabek.com",
+    slug: "mustafabek.com",
+    tagline: "My personal website.",
+    projectUrl: "https://mustafabek.com/",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1740659427/mustafa/lcrxma1mobioywstpemh.jpg",
+  },
+  {
+    _id: "6",
+    name: "Banking Credit System",
+    slug: "banking-credit-system",
+    projectUrl: "https://github.com/mustafabek1/Banking-Credit-System",
+    tagline: "A credit system for banks.",
+    logo: "",
+  },
+  {
+    _id: "7",
+    name: "Araba.com",
+    slug: "araba.com",
+    projectUrl: "https://www.araba.com/",
+    tagline: "Used car buying and selling website.",
+    logo: "https://res.cloudinary.com/diqwbliye/image/upload/v1741167467/mustafa/arabacom_logo.webp",
+  },
+];
+
+export const getProjects = async () => {
+  try {
+    const project = await sanityFetch({ query: projectsQuery, tags: ["project"] }) as ProjectType[];
+
+    return project.length > 0 ? project : mockProjectsQuery;
+  } catch (error) {
+    console.error("Sanity fetch error:", error);
+    return mockProjectsQuery;
+  }
+};
+
 
 export const singleProjectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
   _id,
